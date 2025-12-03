@@ -1,47 +1,47 @@
 ﻿using System;
 using System.IO;
 
-const string nomeArquivo = "input2.txt";
-const int tamanhoMostrador = 100;
-int posicaoAtual = 50;
-long contadorZeros = 0;
+const string fileName = "input2.txt";
+const int dialSize = 100;
+int currentPosition = 50;
+long zeroCount = 0;
 
-if (!File.Exists(nomeArquivo))
+if (!File.Exists(fileName))
     return;
 
-string[] instrucoes = File.ReadAllLines(nomeArquivo);
+string[] instructions = File.ReadAllLines(fileName);
 
-foreach (string linha in File.ReadLines(nomeArquivo))
+foreach (string line in File.ReadLines(fileName))
 {
-    if (string.IsNullOrWhiteSpace(linha)) continue;
+    if (string.IsNullOrWhiteSpace(line)) continue;
 
-    char direcao = linha[0];
-    int distancia = int.Parse(linha[1..]);
+    char direction = line[0];
+    int distance = int.Parse(line[1..]);
 
-    contadorZeros += (distancia / tamanhoMostrador);
+    zeroCount += (distance / dialSize);
 
-    int resto = distancia % tamanhoMostrador;
+    int remainder = distance % dialSize;
 
-    if (direcao == 'R')
+    if (direction == 'R')
     {
-        if (posicaoAtual + resto >= tamanhoMostrador)
+        if (currentPosition + remainder >= dialSize)
         {
-            contadorZeros++;
+            zeroCount++;
         }
 
-        posicaoAtual = (posicaoAtual + resto) % tamanhoMostrador;
+        currentPosition = (currentPosition + remainder) % dialSize;
     }
     else
     {
-        if (posicaoAtual > 0 && posicaoAtual - resto <= 0)
+        if (currentPosition > 0 && currentPosition - remainder <= 0)
         {
-            contadorZeros++;
+            zeroCount++;
         }
 
-        posicaoAtual = ((posicaoAtual - resto) % tamanhoMostrador + tamanhoMostrador) % tamanhoMostrador;
+        currentPosition = ((currentPosition - remainder) % dialSize + dialSize) % dialSize;
     }
 }
 
 Console.WriteLine("--------------------------------------------------");
-Console.WriteLine($"Senha da Parte 2 (Total de zeros): {contadorZeros}");
+Console.WriteLine($"Part 2 Password (Total zeros): {zeroCount}");
 Console.WriteLine("--------------------------------------------------");
