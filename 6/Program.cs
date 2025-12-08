@@ -12,7 +12,6 @@ var lines = File.ReadAllLines(fileName)
 
 long sum = 0;
 int totalColunas = lines[0].Length;
-int totalLinhas = lines.Length;
 for (int i = 0; i < totalColunas; i++)
 {
     var operacao = "";
